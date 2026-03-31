@@ -1,1 +1,1 @@
-Static site version. Upload this index.html to GitHub or Vercel. No build settings needed. This avoids the React/Tailwind deployment issues.
+Static HTML version with working links. Upload index.html to GitHub and redeploy on Vercel with no build settings.
