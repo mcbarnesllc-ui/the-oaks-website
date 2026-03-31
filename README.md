@@ -23,3 +23,4 @@ The live site exposes gallery structure and labels, but I could not reliably pac
 npm install
 npm run dev
 ```
+deploy
