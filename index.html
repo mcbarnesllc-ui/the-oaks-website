@@ -1,11 +1,483 @@
-@import "tailwindcss";
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>The Oaks | Apartment Rentals in Des Moines, IA</title>
+  <meta name="description" content="Professional website concept for The Oaks apartment rentals in Des Moines, Iowa." />
+  <style>
+    :root {
+      --bg: #f7f5f1;
+      --surface: #ffffff;
+      --surface-soft: #f1eee8;
+      --text: #1e293b;
+      --muted: #64748b;
+      --line: #e7e2d8;
+      --dark: #0f172a;
+      --accent: #d6c3a1;
+      --accent-dark: #b89a68;
+      --shadow: 0 18px 40px rgba(15, 23, 42, 0.08);
+      --radius: 24px;
+      --max: 1180px;
+    }
 
-html {
-  scroll-behavior: smooth;
-}
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      font-family: Inter, Arial, Helvetica, sans-serif;
+      color: var(--text);
+      background: var(--bg);
+      line-height: 1.5;
+    }
 
-body {
-  margin: 0;
-  font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-  background: #fafaf9;
-}
+    a { color: inherit; text-decoration: none; }
+    .container { width: min(var(--max), calc(100% - 32px)); margin: 0 auto; }
+
+    .topbar {
+      position: sticky; top: 0; z-index: 20;
+      backdrop-filter: blur(12px);
+      background: rgba(247, 245, 241, 0.92);
+      border-bottom: 1px solid var(--line);
+    }
+
+    .nav {
+      display: flex; align-items: center; justify-content: space-between;
+      gap: 20px; padding: 18px 0; flex-wrap: wrap;
+    }
+
+    .brand {
+      display: flex; align-items: center; gap: 14px; font-weight: 700;
+    }
+
+    .brand-mark {
+      width: 48px; height: 48px; border-radius: 16px; background: var(--dark);
+      color: #fff; display: grid; place-items: center; font-size: 22px; box-shadow: var(--shadow);
+    }
+
+    .brand-sub {
+      display: block; color: var(--muted); font-weight: 500; font-size: 13px; margin-top: 2px;
+    }
+
+    .nav-links { display: flex; gap: 24px; font-size: 14px; color: var(--muted); flex-wrap: wrap; }
+    .nav-cta { display: flex; gap: 10px; flex-wrap: wrap; }
+
+    .btn {
+      display: inline-flex; align-items: center; justify-content: center;
+      padding: 13px 18px; border-radius: 999px; font-weight: 700; font-size: 14px;
+      border: 1px solid var(--line); background: var(--surface); transition: 0.2s ease;
+    }
+
+    .btn:hover { transform: translateY(-1px); }
+    .btn-dark { background: var(--dark); color: white; border-color: var(--dark); }
+
+    .hero {
+      padding: 52px 0 28px;
+      background:
+        radial-gradient(circle at top left, rgba(214, 195, 161, 0.25), transparent 28%),
+        radial-gradient(circle at bottom right, rgba(184, 154, 104, 0.15), transparent 24%),
+        var(--bg);
+    }
+
+    .hero-grid {
+      display: grid; grid-template-columns: 1.1fr 0.9fr; gap: 34px; align-items: center;
+    }
+
+    .eyebrow {
+      display: inline-flex; align-items: center; gap: 8px; padding: 10px 14px; border-radius: 999px;
+      background: var(--surface); border: 1px solid var(--line); color: var(--muted); font-size: 14px;
+      box-shadow: var(--shadow);
+    }
+
+    h1 {
+      font-size: clamp(38px, 7vw, 70px); line-height: 1.02; margin: 18px 0 18px; letter-spacing: -0.04em;
+    }
+
+    .hero p.lead { font-size: 18px; color: var(--muted); max-width: 690px; margin: 0 0 28px; }
+    .hero-actions { display: flex; gap: 14px; flex-wrap: wrap; margin-bottom: 28px; }
+
+    .stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; }
+
+    .card, .stat, .panel, .faq, .gallery-item {
+      background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); box-shadow: var(--shadow);
+    }
+
+    .stat { padding: 18px; }
+    .stat strong { display: block; font-size: 28px; margin-bottom: 2px; }
+    .stat span { color: var(--muted); font-size: 14px; }
+
+    .hero-visual { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+
+    .visual-block {
+      min-height: 260px; border-radius: 32px; padding: 16px;
+      background: linear-gradient(160deg, #ece5d8, #f8f4ec); box-shadow: var(--shadow);
+    }
+
+    .visual-block.alt {
+      margin-top: 42px; min-height: 330px; background: linear-gradient(160deg, #ebeef3, #f8fafc);
+    }
+
+    .visual-inner {
+      height: 100%; border-radius: 24px;
+      background: linear-gradient(180deg, rgba(255,255,255,0.25), rgba(255,255,255,0.92));
+      border: 1px solid rgba(255,255,255,0.7); padding: 24px; display: flex; align-items: end;
+    }
+
+    .section { padding: 34px 0 86px; }
+    .section-head { margin-bottom: 26px; }
+    .kicker { text-transform: uppercase; letter-spacing: 0.22em; color: var(--muted); font-size: 12px; font-weight: 700; margin-bottom: 12px; }
+    h2 { margin: 0 0 10px; font-size: clamp(30px, 5vw, 46px); line-height: 1.05; letter-spacing: -0.03em; }
+    .section-copy { color: var(--muted); font-size: 18px; max-width: 760px; }
+
+    .snapshot { padding-top: 0; }
+
+    .snapshot-wrap {
+      padding: 26px; background: var(--surface); border: 1px solid var(--line); border-radius: 30px; box-shadow: var(--shadow);
+    }
+
+    .chips { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin-top: 18px; }
+    .chip {
+      padding: 14px 16px; background: var(--surface-soft); border-radius: 18px; font-weight: 600; color: #334155; text-align: center;
+    }
+
+    .grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+    .grid-2 { display: grid; grid-template-columns: repeat(2, 1fr); gap: 22px; }
+
+    .card { padding: 28px; }
+    .card h3 { margin: 0 0 8px; font-size: 22px; }
+    .card p, .panel p, .faq p, .availability p { color: var(--muted); margin: 0; }
+
+    .dark-section { background: #111827; color: white; }
+    .dark-section .section-copy, .dark-section .card p, .dark-section .panel p { color: #cbd5e1; }
+    .dark-card { background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.08); box-shadow: none; }
+
+    .location-layout {
+      display: grid; grid-template-columns: 1.05fr 0.95fr; gap: 26px; align-items: start;
+    }
+
+    .map-box {
+      min-height: 520px; display: grid; place-items: center; text-align: center;
+      background: linear-gradient(160deg, #fafaf9, #ede7dc); color: var(--muted); font-weight: 600;
+    }
+
+    .gallery-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 18px; }
+    .gallery-item {
+      overflow: hidden; min-height: 260px; background: linear-gradient(150deg, #ebe4d8, #f9f7f3);
+      display: flex; align-items: end; padding: 16px;
+    }
+
+    .gallery-label {
+      padding: 10px 12px; border-radius: 16px; background: rgba(255,255,255,0.88);
+      font-size: 14px; font-weight: 600; color: #334155;
+    }
+
+    .faq-wrap { display: grid; gap: 14px; }
+    .faq { padding: 22px 24px; }
+    .faq summary { list-style: none; cursor: pointer; font-weight: 700; font-size: 18px; }
+    .faq summary::-webkit-details-marker { display: none; }
+    .faq p { margin-top: 12px; }
+
+    .availability {
+      padding: 34px; border-radius: 30px; background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(255,255,255,0.08); display: grid; grid-template-columns: 1.1fr 0.9fr; gap: 20px; align-items: center;
+    }
+
+    .availability-actions { display: grid; gap: 12px; justify-items: end; }
+
+    .contact-box {
+      padding: 28px; background: var(--surface-soft); border-radius: 28px; border: 1px solid var(--line); box-shadow: var(--shadow);
+    }
+
+    .contact-list { display: grid; gap: 12px; margin: 22px 0 0; }
+    .contact-list a.phone { font-size: 30px; font-weight: 800; }
+    .contact-placeholder { display: grid; gap: 14px; }
+
+    .placeholder-box {
+      padding: 18px; border-radius: 18px; border: 1px dashed #c8c3ba; background: white; color: var(--muted);
+    }
+
+    footer { padding: 26px 0 40px; border-top: 1px solid var(--line); background: white; }
+    .footer-wrap {
+      display: flex; justify-content: space-between; gap: 20px; align-items: center; flex-wrap: wrap; color: var(--muted); font-size: 14px;
+    }
+    .footer-links { display: flex; gap: 18px; flex-wrap: wrap; }
+
+    @media (max-width: 1100px) {
+      .hero-grid, .location-layout, .availability, .grid-3, .grid-2, .gallery-grid, .chips { grid-template-columns: 1fr 1fr; }
+      .availability-actions { justify-items: start; }
+      .nav-links { display: none; }
+    }
+
+    @media (max-width: 760px) {
+      .hero-grid, .hero-visual, .stats, .grid-3, .grid-2, .location-layout, .gallery-grid, .chips, .availability { grid-template-columns: 1fr; }
+      .hero { padding-top: 28px; }
+      .visual-block.alt { margin-top: 0; }
+    }
+  </style>
+</head>
+<body>
+  <header class="topbar">
+    <div class="container nav">
+      <a href="#home" class="brand">
+        <div class="brand-mark">O</div>
+        <div>
+          The Oaks
+          <span class="brand-sub">Apartment rentals in Des Moines, IA</span>
+        </div>
+      </a>
+
+      <nav class="nav-links">
+        <a href="#floor-plans">Floor Plans</a>
+        <a href="#amenities">Amenities</a>
+        <a href="#location">Location</a>
+        <a href="#gallery">Gallery</a>
+        <a href="#faqs">FAQs</a>
+        <a href="#contact">Contact</a>
+      </nav>
+
+      <div class="nav-cta">
+        <a class="btn" href="https://livlavender.appfolio.com/connect/users/sign_in">Resident Portal</a>
+        <a class="btn" href="tel:5158954020">515-895-4020</a>
+        <a class="btn btn-dark" href="#availability">Apply Today</a>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero" id="home">
+      <div class="container hero-grid">
+        <div>
+          <div class="eyebrow">Comfortable and affordable apartment living</div>
+          <h1>Gorgeous apartment rentals at The Oaks</h1>
+          <p class="lead">Discover one and two bedroom apartment homes in Des Moines with practical amenities, a convenient location near Route 69 and I 235, and a leasing team ready to help you find the right fit.</p>
+          <div class="hero-actions">
+            <a class="btn btn-dark" href="#availability">Check Availability</a>
+            <a class="btn" href="#gallery">View Gallery</a>
+          </div>
+          <div class="stats">
+            <div class="stat"><strong>1 & 2</strong><span>Bedroom layouts</span></div>
+            <div class="stat"><strong>Select</strong><span>Washer and dryer units</span></div>
+            <div class="stat"><strong>By Appt.</strong><span>Easy tour scheduling</span></div>
+          </div>
+        </div>
+
+        <div class="hero-visual">
+          <div class="visual-block">
+            <div class="visual-inner">
+              <div>
+                <div class="kicker">Gallery Preview</div>
+                <h3>Bright living spaces</h3>
+                <p>A cleaner, more premium first impression for future residents.</p>
+              </div>
+            </div>
+          </div>
+          <div class="visual-block alt">
+            <div class="visual-inner">
+              <div>
+                <div class="kicker">Comfort</div>
+                <h3>Kitchens, bedrooms, and baths with style</h3>
+                <p>Structured to feel more polished while staying easy to use.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section snapshot">
+      <div class="container snapshot-wrap">
+        <div class="kicker">Quick Snapshot</div>
+        <h2>Why renters consider The Oaks</h2>
+        <div class="chips">
+          <div class="chip">Army Post Plaza</div>
+          <div class="chip">Southridge Mall</div>
+          <div class="chip">Hy Vee</div>
+          <div class="chip">Target</div>
+          <div class="chip">Hobby Lobby</div>
+          <div class="chip">Starbucks</div>
+          <div class="chip">DMACC</div>
+          <div class="chip">Route 69 Access</div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="floor-plans">
+      <div class="container">
+        <div class="section-head">
+          <div class="kicker">Floor Plans</div>
+          <h2>Designed for comfort and convenience</h2>
+          <div class="section-copy">The Oaks offers one and two bedroom apartment layouts created to support everyday living, whether you are relaxing at home, hosting guests, or settling into a routine that fits your lifestyle.</div>
+        </div>
+        <div class="grid-3">
+          <div class="card">
+            <h3>Smart Layouts</h3>
+            <p>Open living areas with comfortable flow between kitchen, dining, and lounge spaces.</p>
+          </div>
+          <div class="card">
+            <h3>Functional Bedrooms</h3>
+            <p>Well proportioned bedrooms with room to unwind and settle in with ease.</p>
+          </div>
+          <div class="card">
+            <h3>Modern Bathrooms</h3>
+            <p>Clean, updated bathrooms designed with a fresh and simple aesthetic.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section dark-section" id="amenities">
+      <div class="container">
+        <div class="section-head">
+          <div class="kicker">Amenities</div>
+          <h2>Features that make home feel better</h2>
+          <div class="section-copy">The Oaks offers practical amenities designed to make daily life more convenient, comfortable, and connected.</div>
+        </div>
+        <div class="grid-3">
+          <div class="card dark-card"><h3>One and Two Bedroom Rentals</h3><p>Comfortable layouts built for practical day to day living.</p></div>
+          <div class="card dark-card"><h3>Select Washer and Dryer Units</h3><p>Added convenience in select apartment homes.</p></div>
+          <div class="card dark-card"><h3>Garage Rentals</h3><p>Extra storage and parking protection when available.</p></div>
+          <div class="card dark-card"><h3>Community Grills</h3><p>Outdoor spaces that make casual gatherings easier.</p></div>
+          <div class="card dark-card"><h3>Playground</h3><p>A resident amenity that supports families and everyday fun.</p></div>
+          <div class="card dark-card"><h3>Resident Only Parking</h3><p>Convenient parking focused on residents and their guests.</p></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="location">
+      <div class="container location-layout">
+        <div>
+          <div class="section-head">
+            <div class="kicker">Location</div>
+            <h2>Close to what matters most</h2>
+            <div class="section-copy">The Oaks is located at 6209 SE 5th St., Des Moines, IA 50315, just minutes from Route 69 and I 235 with convenient access to shopping, dining, schools, and the energy of the city.</div>
+          </div>
+          <div class="grid-2">
+            <div class="card">
+              <h3>Nearby Shopping</h3>
+              <p>Army Post Plaza, Southridge Mall, Southridge Square, Hy Vee, Target, and Hobby Lobby.</p>
+            </div>
+            <div class="card">
+              <h3>Dining and Schools</h3>
+              <p>Starbucks, Twisted Bean Coffee Company, Primos Tex Mex Bar and Grill, Popeyes, Applebee’s, DMACC, Grand View University, and Drake University.</p>
+            </div>
+          </div>
+          <div class="card" style="margin-top:20px;">
+            <h3>Address and Leasing Contact</h3>
+            <p>6209 SE 5th St. Des Moines, IA 50315</p>
+            <p style="margin-top:10px;"><a href="tel:5158954020" style="font-size:28px;font-weight:800;color:#0f172a;">515-895-4020</a></p>
+          </div>
+        </div>
+        <div class="panel map-box">Embedded Google Map can be added here<br>6209 SE 5th St.<br>Des Moines, IA 50315</div>
+      </div>
+    </section>
+
+    <section class="section" id="gallery">
+      <div class="container">
+        <div class="section-head">
+          <div class="kicker">Gallery</div>
+          <h2>See life at The Oaks</h2>
+          <div class="section-copy">This upgraded concept keeps the gallery cleaner and more premium. Real property images can be swapped in directly once you have the photo files.</div>
+        </div>
+        <div class="gallery-grid">
+          <div class="gallery-item"><div class="gallery-label">Bright Living Space</div></div>
+          <div class="gallery-item"><div class="gallery-label">Accent Wall Detail</div></div>
+          <div class="gallery-item"><div class="gallery-label">Kitchen and Dining Area</div></div>
+          <div class="gallery-item"><div class="gallery-label">Modern Apartment Kitchen</div></div>
+          <div class="gallery-item"><div class="gallery-label">Kitchen Sink and Countertop</div></div>
+          <div class="gallery-item"><div class="gallery-label">Comfortable Bedroom</div></div>
+          <div class="gallery-item"><div class="gallery-label">Bedroom with Twin Bed</div></div>
+          <div class="gallery-item"><div class="gallery-label">Updated Bathroom</div></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="faqs">
+      <div class="container">
+        <div class="section-head">
+          <div class="kicker">FAQs</div>
+          <h2>Answers to common questions</h2>
+        </div>
+        <div class="faq-wrap">
+          <details class="faq">
+            <summary>Are the apartments smoke free?</summary>
+            <p>Yes. All apartment units are smoke free, and residents may use designated outdoor smoking areas.</p>
+          </details>
+          <details class="faq">
+            <summary>Are pets allowed?</summary>
+            <p>Yes. Pets are allowed with up to date vaccination records, a non refundable pet deposit, and an additional monthly pet fee.</p>
+          </details>
+          <details class="faq">
+            <summary>Do you require renters insurance?</summary>
+            <p>Yes. The current property FAQs state that renters insurance or required liability coverage is expected for residents.</p>
+          </details>
+          <details class="faq">
+            <summary>Are the apartments furnished?</summary>
+            <p>No. Apartments are not furnished, which gives residents the flexibility to decorate and furnish their space however they prefer.</p>
+          </details>
+          <details class="faq">
+            <summary>How do I schedule a tour?</summary>
+            <p>You can call the leasing team at 515 895 4020 or submit a contact request to schedule a tour by appointment.</p>
+          </details>
+          <details class="faq">
+            <summary>What are the leasing hours?</summary>
+            <p>The current website lists leasing hours as by appointment only from 9:00 AM to 4:00 PM.</p>
+          </details>
+        </div>
+      </div>
+    </section>
+
+    <section class="section dark-section" id="availability">
+      <div class="container availability">
+        <div>
+          <div class="kicker">Check Availability</div>
+          <h2>Ready to make The Oaks your next home?</h2>
+          <p>Contact the leasing team to learn about current availability, schedule a personal tour, or begin your application.</p>
+        </div>
+        <div class="availability-actions">
+          <a class="btn" href="#contact">Schedule a Tour</a>
+          <a class="btn" href="https://www.theoaksdsm.com/contact-us/">Apply Today</a>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="contact">
+      <div class="container grid-2">
+        <div>
+          <div class="section-head">
+            <div class="kicker">Contact Us</div>
+            <h2>Contact us today to schedule a tour</h2>
+            <div class="section-copy">We would love to help you find the right apartment home. The leasing office is currently available by appointment only from 9:00 AM to 4:00 PM.</div>
+          </div>
+          <div class="contact-list">
+            <a class="phone" href="tel:5158954020">515-895-4020</a>
+            <div>6209 SE 5th St. Des Moines, IA 50315</div>
+            <div>Emergency maintenance: 515-218-9398</div>
+            <div class="hero-actions" style="margin-top:10px; margin-bottom:0;">
+              <a class="btn btn-dark" href="tel:5158954020">Call Now</a>
+              <a class="btn" href="https://livlavender.appfolio.com/connect/users/sign_in">Resident Portal</a>
+            </div>
+          </div>
+        </div>
+        <div class="contact-box">
+          <div class="contact-placeholder">
+            <div class="placeholder-box">Contact form integration area</div>
+            <div class="placeholder-box">Leasing hours: By Appointment Only, 9:00 AM to 4:00 PM</div>
+            <div class="placeholder-box">Add privacy policy, sitemap, and accessibility statement links here</div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container footer-wrap">
+      <div>© 2026 The Oaks. All Rights Reserved.</div>
+      <div class="footer-links">
+        <a href="#">Privacy Policy</a>
+        <a href="#">Sitemap</a>
+        <a href="#">Accessibility Statement</a>
+      </div>
+    </div>
+  </footer>
+</body>
+</html>
